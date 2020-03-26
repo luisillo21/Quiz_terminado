@@ -1,0 +1,37 @@
+{% extends 'index.html' %} {% load crispy_forms_tags %}
+<!--               -->{% block titulo %} Profesora virtual | Personas
+{% endblock titulo %}<!--  -->
+{% block body %}<!--  -->
+
+<form method="POST">
+  {% csrf_token %}
+  <div class="card">
+    <div class="card-header">
+      <strong>Formulario de Registro | PERSONAS</strong>
+    </div>
+    <div class="card-body">
+      <div class="row darkwhite-bg py-2">
+                    <div class="col-12">
+                      <div class="form-row">
+                        <div class=" col-6 col-md-4 mb-0">
+                          {{ form.nombres|as_crispy_field }}
+                        </div>
+                        <div class=" col-6 col-md-4 mb-0">
+                          {{ form.apellidos|as_crispy_field }}
+                        </div>
+                        <div class=" col-6 col-md-4 mb-0">
+                          {{ form.cedula|as_crispy_field }}
+                        </div>
+                        <div class=" col-6 col-md-4 mb-0">
+                          {{ form.foto|as_crispy_field }}
+                        </div>
+                      </div>
+                    </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-success">Registrar</button>
+  <a class="btn btn-danger" href="{% url 'seguridad:personas' %}">Cancelar</a>
+</form>
+
+{% endblock body %}

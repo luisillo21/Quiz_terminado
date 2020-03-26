@@ -1,0 +1,59 @@
+{% extends 'index.html' %} {% load crispy_forms_tags %}
+<!--               -->{% block titulo %} Profesora virtual | Listado de examenes
+{% endblock titulo %}<!--  -->
+{% block body %}<!--  -->
+
+<a href="{% url 'evaluacion:agregar_examenes' %}" class="btn btn-primary text-light"> Agregar nuevo examen </a>
+
+{% if examenes %}
+
+            <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">Asignacion | Preguntas</strong>
+                            </div>
+                            <div class="card-body">
+                                <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nombre</th>
+                                            <th>Materia</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for c in examenes %}
+                                        <tr>
+                                            <td>{{c.id_examen}}</td>
+                                            <td>{{c.nombre}}</td>
+                                            <td>{{c.id_materia}}</td>
+                                          <td>
+                                            <a href="{% url 'evaluacion:editar_examenes' c.id_examen %}" class="btn btn-primary">Editar</a>
+                                            <a href="{% url 'evaluacion:eliminar_examenes' c.id_examen %}" class="btn btn-danger">Eliminar</a>
+                                          </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+            </div>
+{% else %}
+<h1>No existen preguntas registrados</h1>
+
+
+
+{% endif %} {% endblock body %}
+
+{% block extrajs %}
+
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  $(document).ready(function() {
+    $("#id_id_materia").toggleClass("js-example-basic-single");
+    $(".js-example-basic-single").select2();
+  });
+</script>
+
+{% endblock extrajs %}
+
+

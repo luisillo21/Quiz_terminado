@@ -1,0 +1,56 @@
+{% extends 'index.html' %} {% load crispy_forms_tags %}
+<!--               -->{% block titulo %} Profesora virtual | Listado de preguntas
+{% endblock titulo %}<!--  -->
+{% block body %}<!--  -->
+
+<a href="{% url 'evaluacion:agregar_preguntas' %}" class="btn btn-primary text-light"> Agregar nuevo pregunta </a>
+
+{% if preguntas %}
+
+            <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">Asignacion | Preguntas</strong>
+                            </div>
+                            <div class="card-body">
+                                <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Pregunta</th>
+                                            <th>Opciones</th>
+                                            <th>Link</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for c in preguntas %}
+                                        <tr>
+                                            <td>{{c.id_pregunta}}</td>
+                                            <td>{{c.pregunta}}</td>
+                                            <td>
+                                                {% for opc in c.opciones.all %}
+                                                    Opcion:{{opc.descripcion}} Respuesta correcta? {{opc.respuesta}}
+                                                <br>
+                                                <hr>
+                                                {% endfor %}
+                                            </td>
+                                            <td>{{c.anexo}}</td>
+
+                                          <td>
+                                            <a href="{% url 'evaluacion:editar_preguntas' c.id_pregunta %}" class="btn btn-primary">Editar</a>
+                                            <a href="{% url 'evaluacion:eliminar_preguntas' c.id_pregunta %}" class="btn btn-danger">Eliminar</a>
+                                          </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+            </div>
+{% else %}
+<h1>No existen preguntas registrados</h1>
+
+
+
+{% endif %} {% endblock body %}
+
+

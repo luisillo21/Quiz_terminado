@@ -1,0 +1,44 @@
+{% extends 'index.html' %} {% load crispy_forms_tags %}
+<!--               -->{% block titulo %} Profesora virtual | Opciones
+{% endblock titulo %}<!--  -->
+{% block body %}<!--  -->
+
+<form method="POST">
+  {% csrf_token %}
+  <div class="card">
+    <div class="card-header">
+      <strong>Formulario de Registro | OPCIONES</strong>
+    </div>
+    <div class="card-body">
+      <div class="row darkwhite-bg py-2">
+                    <div class="col-12">
+                      <div class="form-row">
+                        <div class=" col-6 col-md-4 mb-0">
+                          {{ form.descripcion|as_crispy_field }}
+                        </div>
+                        <div class=" col-6 col-md-4 mb-0">
+                          {{ form.respuesta|as_crispy_field }}
+                        </div>
+
+                        <div class=" col-6 col-md-4 mb-0">
+                           <div id="div_id_autor" class="form-group">
+                            <label for="id_autor" class=" requiredField">
+                                Autor<span class="asteriskField">*</span>
+                            </label>
+                                <div class="">
+                                    <select name="autor" class="select form-control" required="" id="id_autor">
+                                      <option value="{{datos_usuario.id_usuario}}" selected="">{{datos_usuario.usuario}}</option>
+                                    </select>
+                                </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+                  <button type="submit" class="btn btn-success btn-block">Registrar</button>
+                  <a class="btn btn-danger btn-block" href="{% url 'evaluacion:opciones' %}">Cancelar</a>
+        </div>
+  </div>
+</form>
+
+{% endblock body %}

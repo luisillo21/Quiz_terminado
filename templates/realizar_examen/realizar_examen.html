@@ -1,0 +1,66 @@
+{% extends 'index.html' %} {% load crispy_forms_tags %}
+<!--               -->{% block titulo %} Profesora virtual | Listado de Cursos
+{% endblock titulo %}<!--  -->
+{% block body %}<!--  -->
+        {% if mensaje_de_felicitaciones %}
+            <div class="row py-4 justify-content-center">
+                <div class="col">
+                        <div class="card bg-success">
+                            <div class="card-body">
+                                <blockquote class="blockquote mb-0 text-light">
+                                    <h5 class="text-light">{{mensaje_de_felicitaciones}}</h5>
+                                </blockquote>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if mensaje_de_error %}
+                        <div class="card">
+                            <div class="card-header bg-danger">
+                                <strong class="card-title text-light">TU NOTA ES: {{mensaje_de_error}}. mejor suerte a la proxima :)</strong>
+                            </div>
+                        </div>
+            {% endif %}
+
+    <div class="card shadow">
+        <form action="{% url 'evaluacion:realizar_examen' examen.id_examen %}" method="POST">
+            {% csrf_token %}
+                            <div class="card-header bg-dark">
+                               <center> <strong class="text-light text-center h4">{{examen.nombre}}</strong> </center>
+                            </div>
+                            <div class="card-body card-block bg">
+                                <div class="row">
+                                    {% for p in preguntas %}
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label class=" form-control-label text-success h5 text-center">{{p.pregunta}}</label>
+                                            <div class="input-group">
+                                                <select name="pregunta_{{p.id_pregunta}}" id="pregunta_{{p.id_pregunta}}" class="form-control-sm form-control">
+                                                    <option value="ninguno" disabled selected>Seleccione una respuesta</option>
+                                                    {% for o in p.opciones.all %}
+                                                        <option value="{{o.id_opcion}}">{{o.descripcion}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="submit" class="btn btn-success btn-block text-light" value="TERMINADO!!">
+                                        <a href="{% url 'seguridad:inicio' %}" class="btn btn-danger btn-block text-light" >CANCELAR</a>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+                        </div>
+
+ {% endblock body %}
+
+

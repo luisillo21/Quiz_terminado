@@ -1,0 +1,52 @@
+{% extends 'index.html' %} {% load crispy_forms_tags %}
+<!--               -->{% block titulo %} Profesora virtual | Personas
+{% endblock titulo %}<!--  -->
+{% block body %}<!--  -->
+
+<form method="POST">
+  {% csrf_token %}
+  <div class="card">
+    <div class="card-header">
+      <strong>Formulario de Registro | USUARIO</strong>
+    </div>
+    <div class="card-body">
+      <div class="row darkwhite-bg py-2">
+                    <div class="col-12">
+                      <div class="form-row">
+                        <div class=" col-6 col-md-4 mb-0">
+                          {{ form.usuario|as_crispy_field }}
+                        </div>
+                        <div class=" col-6 col-md-4 mb-0">
+                          {{ form.clave|as_crispy_field }}
+                        </div>
+                        <div class=" col-6 col-md-4 mb-0">
+                          {{ form.correo|as_crispy_field }}
+                        </div>
+                        <div class=" col-6 col-md-4 mb-0">
+                          {{ form.rol_usuario|as_crispy_field }}
+                        </div>
+                        <div class=" col-6 col-md-4 mb-0">
+                          {{ form.id_persona|as_crispy_field }}
+                        </div>
+                      </div>
+                    </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-success">Registrar</button>
+  <a class="btn btn-danger" href="{% url 'seguridad:usuarios' %}">Cancelar</a>
+</form>
+
+{% endblock body %}
+
+{% block extrajs %}
+
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  $(document).ready(function() {
+    $("#id_persona").toggleClass("js-example-basic-single");
+    $(".js-example-basic-single").select2();
+  });
+</script>
+
+{% endblock extrajs %}

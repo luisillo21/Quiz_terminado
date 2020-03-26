@@ -1,0 +1,51 @@
+{% extends 'index.html' %} {% load crispy_forms_tags %}
+<!--               -->{% block titulo %} Profesora virtual | Listado de Opcion
+{% endblock titulo %}<!--  -->
+{% block body %}<!--  -->
+
+<a
+  href="{% url 'evaluacion:agregar_opciones' %}"
+  class="btn btn-primary text-light"
+  >Agregar nueva opcion</a
+>
+
+{% if opc %}
+
+            <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">Asignacion | Opcion</strong>
+                            </div>
+                            <div class="card-body">
+                                <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Descripcion</th>
+                                            <th>Respuesta correcta?</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for c in opc %}
+                                        <tr>
+                                            <td>{{c.id_opcion}}</td>
+                                            <td>{{c.descripcion}}</td>
+                                            <td>{{c.respuesta}}</td>
+                                          <td>
+            <a href="{% url 'evaluacion:editar_opciones' c.id_opcion %}" class="btn btn-primary">Editar</a>
+            <a href="{% url 'evaluacion:eliminar_opciones' c.id_opcion %}" class="btn btn-danger">Eliminar</a>
+          </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+            </div>
+{% else %}
+<h1>No existen Cursos registrados</h1>
+
+
+
+{% endif %} {% endblock body %}
+
+

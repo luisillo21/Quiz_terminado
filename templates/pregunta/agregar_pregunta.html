@@ -1,0 +1,70 @@
+{% extends 'index.html' %} {% load crispy_forms_tags %}
+<!--               -->{% block titulo %} Profesora virtual | Preguntas
+{% endblock titulo %}<!--  -->
+{% block body %}<!--  -->
+
+<form method="POST">
+  {% csrf_token %}
+  <div class="card">
+    <div class="card-header">
+      <strong>Formulario de Registro | PREGUNTAS</strong>
+    </div>
+    <div class="card-body">
+      <div class="row darkwhite-bg py-2">
+                    <div class="col-12">
+                      <div class="form-row">
+
+                        <div class=" col-6 col-md-4 mb-0">
+                          {{ form.examen|as_crispy_field }}
+                        </div>
+
+                        <div class=" col-8 col-md-4 mb-0">
+                          {{ form.pregunta|as_crispy_field }}
+                        </div>
+                        <div class=" col-8 col-md-4 mb-0">
+                          {{ form.opciones|as_crispy_field }}
+                        </div>
+
+                        <div class=" col-6 col-md-4 mb-0">
+                           <div id="div_id_autor" class="form-group">
+                            <label for="id_autor" class=" requiredField">
+                                Autor<span class="asteriskField">*</span>
+                            </label>
+                                <div class="">
+                                    <select name="autor" class="select form-control" required="" id="id_autor">
+                                      <option value="{{datos_usuario.id_usuario}}" selected="">{{datos_usuario.usuario}}</option>
+                                    </select>
+                                </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-success">Registrar</button>
+  <a class="btn btn-danger" href="{% url 'evaluacion:preguntas' %}">Cancelar</a>
+</form>
+
+{% endblock body %}
+
+
+
+
+
+{% block extrajs %}
+
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  $(document).ready(function() {
+    $("#id_examen").toggleClass("js-example-basic-single");
+    $("#id_opciones").toggleClass("js-example-basic-multiple");
+    $(".js-example-basic-single").select2();
+    $(".js-example-basic-multiple").select2({
+      width: "resolve", // need to override the changed default
+      placeholder: "Selecciona una opcion "
+    });
+  });
+</script>
+
+{% endblock extrajs %}

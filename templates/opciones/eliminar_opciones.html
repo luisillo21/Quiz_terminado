@@ -1,0 +1,31 @@
+{% extends 'index.html' %} {% block titulo %} Biblioteca.dev | confirmación de
+Eliminación {% endblock titulo %} {% block body %} {% if error %}
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong>Advertencia: </strong> {{ error }}
+</div>
+{% endif %}
+<form
+  method="post"
+  action="{% url 'evaluacion:eliminar_opciones' opcion.id_opcion %}"
+>
+  {% csrf_token %}
+  <p class="text-danger h4"><strong>¿Desea eliminar a esta opcion?</strong></p>
+  <hr style="background-color: black;" />
+  <label>Descripcion:</label>
+  <br /><label>{{opcion.descripcion}}</label>
+  <hr style="background-color: black;" />
+  <label>Respuesta correcta?</label>
+  <br />
+  <label>{{opcion.respuesta}}</label><br />
+  <hr style="background-color: black;" />
+
+  <button type="submit" class="btn btn-danger">Confirmar</button>
+  <a class="btn btn-success text-light" href="{% url 'evaluacion:opciones' %}"
+    >Cancelar</a
+  >
+</form>
+
+{% endblock body %}

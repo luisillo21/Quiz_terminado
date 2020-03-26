@@ -1,0 +1,61 @@
+{% extends 'index.html' %} {% load crispy_forms_tags %}
+<!--               -->{% block titulo %} Profesora virtual | Listado de Usuarios
+{% endblock titulo %}<!--  -->
+{% block body %}<!--  -->
+
+<a
+  href="{% url 'seguridad:agregar_usuarios' %}"
+  class="btn btn-primary text-light"
+  >Agregar nuevo usuario</a
+>
+
+{% if usuario %}
+<div class="card">
+  <div class="card-header">
+    <strong class="card-title">USUARIO</strong>
+  </div>
+  <div class="card-body">
+    <table id="bootstrap-data-table" class="table table-striped table-bordered">
+      <thead>
+        <tr class="text-center text-dark">
+          <th>ID</th>
+          <th>Nombre de usuario</th>
+          <th>Correo</th>
+          <th>Rol usuario</th>
+          <th>Persona</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in usuario %}
+        <tr>
+          <td>{{ p.id_usuario }}</td>
+          <td>{{ p.usuario }}</td>
+          <td>{{p.correo}}</td>
+          <td>{{p.rol_usuario}}</td>
+          <td>
+            {{ p.id_persona.nombres }}<br>
+            {{ p.id_persona.apellidos }}<br>
+            {{ p.id_persona.cedula }}<br>
+          </td>
+          <td>
+            <a
+              href="{% url 'seguridad:editar_usuarios' p.id_usuario %}"
+              class="btn btn-primary"
+              >Editar</a
+            >
+            <a
+              href="{% url 'seguridad:eliminar_usuarios' p.id_usuario %}"
+              class="btn btn-danger"
+              >Eliminar</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% else %}
+<h1>No existen personas registradas </h1>
+{% endif %} {% endblock body %}
