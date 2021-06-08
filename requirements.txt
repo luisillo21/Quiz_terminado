@@ -24,7 +24,7 @@ jdcal==1.4.1
 MarkupSafe==1.1.1
 Naked==0.1.31
 paragraph==1.1.0
-Pillow==6.2.1
+Pillow==8.2.0
 python-decouple==3.3
 pytz==2019.2
 PyYAML==5.3
